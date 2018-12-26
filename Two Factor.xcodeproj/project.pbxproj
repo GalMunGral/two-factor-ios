@@ -15,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		253A8DA221D1EDDE00E56DBD /* Two Factor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Two Factor.entitlements"; sourceTree = "<group>"; };
 		25769CAC21D1E90B00B7E87A /* Two Factor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Two Factor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		25769CAF21D1E90B00B7E87A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		25769CB121D1E90B00B7E87A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +55,7 @@
 		25769CAE21D1E90B00B7E87A /* Two Factor */ = {
 			isa = PBXGroup;
 			children = (
+				253A8DA221D1EDDE00E56DBD /* Two Factor.entitlements */,
 				25769CAF21D1E90B00B7E87A /* AppDelegate.swift */,
 				25769CB121D1E90B00B7E87A /* ViewController.swift */,
 				25769CB321D1E90B00B7E87A /* Main.storyboard */,
@@ -96,6 +98,14 @@
 				TargetAttributes = {
 					25769CAB21D1E90A00B7E87A = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -282,6 +292,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Two Factor/Two Factor.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75TCUGQZPC;
 				INFOPLIST_FILE = "Two Factor/Info.plist";
@@ -300,6 +311,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Two Factor/Two Factor.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75TCUGQZPC;
 				INFOPLIST_FILE = "Two Factor/Info.plist";

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+    
+    UIApplication.shared.registerForRemoteNotifications() // Request devide token
+    
     return true
   }
 
@@ -41,6 +44,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
   }
 
+  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    do {
+      let url = URL(string: "http://128.61.31.37:3000/device-token")!
+      let json = try JSONSerialization.data(withJSONObject: [ "token": deviceToken.hexEncodedString()], options: [])
+      var request = URLRequest(url: url)
+      request.httpMethod = "POST"
+      request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+      request.httpBody = json
+      let task = URLSession.shared.dataTask(with: request)
+      task.resume()
+    } catch {
+      // Error handling
+    }
+  }
+  
+  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    print("Registration for remote notification failed")
+  }
 
+}
+
+extension Data {
+  func hexEncodedString() -> String {
+    return map { String(format: "%02hhx", $0) }.joined()
+  }
 }
 
