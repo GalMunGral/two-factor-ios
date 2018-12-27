@@ -8,14 +8,21 @@
 
 import UIKit
 import Foundation
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
-
+  var deviceToken: String? // Testing
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+    let center = UNUserNotificationCenter.current()
+    center.requestAuthorization(options: [.alert]) { (granted, err) in
+      if let err = err { print(err.localizedDescription) }
+      if granted { print("Authorization granted for alerts") }
+    } // IMPORTANT: must be authorized for alert to display.
     
     UIApplication.shared.registerForRemoteNotifications() // Request devide token
     
@@ -45,22 +52,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-    do {
-      let url = URL(string: "http://128.61.31.37:3000/device-token")!
-      let json = try JSONSerialization.data(withJSONObject: [ "token": deviceToken.hexEncodedString()], options: [])
-      var request = URLRequest(url: url)
-      request.httpMethod = "POST"
-      request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-      request.httpBody = json
-      let task = URLSession.shared.dataTask(with: request)
-      task.resume()
-    } catch {
-      // Error handling
-    }
+    self.deviceToken = deviceToken.hexEncodedString()
+    print("From AppDelegate: Registration success!")
+//    do {
+//      let url = URL(string: "http://128.61.31.37:3000/test")!
+//      let json = try JSONSerialization.data(withJSONObject: [ "token": deviceToken.hexEncodedString()], options: [])
+//      var request = URLRequest(url: url)
+//      request.httpMethod = "POST"
+//      request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//      request.httpBody = json
+//      let task = URLSession.shared.dataTask(with: request)
+//      task.resume()
+//    } catch {
+//      // Error handling
+//    }
+  }
+  
+  func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+    print("From AppDelegate: Registration for remote notification failed!")
   }
   
   func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-    print("Registration for remote notification failed")
+    print("Received remote notification!")
   }
 
 }
