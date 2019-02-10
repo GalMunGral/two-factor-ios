@@ -64,18 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
       print(error)
     }
     
-//    do {
-//      let url = URL(string: "http://128.61.31.37:3000/test")!
-//      let json = try JSONSerialization.data(withJSONObject: [ "token": deviceToken.hexEncodedString()], options: [])
-//      var request = URLRequest(url: url)
-//      request.httpMethod = "POST"
-//      request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//      request.httpBody = json
-//      let task = URLSession.shared.dataTask(with: request)
-//      task.resume()
-//    } catch {
-//      // Error handling
-//    }
   }
   
   private func handleJsonData(_ data: Data) {

@@ -9,15 +9,11 @@
 import UIKit
 import UserNotifications
 
-class ViewController: UIViewController,
-  UITextFieldDelegate {
+class ViewController: UIViewController {
 
-  
   override func viewDidLoad() {
     super.viewDidLoad()
-    
   }
-
 
 }
 
