@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     print("From AppDelegate: Registration success!")
     
     do {
-      let url = URL(string: "http://128.61.29.253:3000/ios/device-token")!
+      let url = URL(string: "http://two-factor-galmungral.herokuapp.com/ios/device-token")!
       print(deviceToken.description)
       let json = try JSONSerialization.data(withJSONObject: [ "token": deviceToken.hexEncodedString() ], options: [])
       var request = URLRequest(url: url)
@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     print("Did receive response")
     if response.actionIdentifier == "CONFIRM_ACTION" {
       do {
-        let url = URL(string: "http://128.61.29.253:3000/confirm")!
+        let url = URL(string: "http://two-factor-galmungral.herokuapp.com/confirm")!
         let json = try JSONSerialization.data(withJSONObject: [ "username": "retarded" ], options: [])
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
